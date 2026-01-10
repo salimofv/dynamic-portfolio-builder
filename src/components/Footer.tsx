@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
+import { FaGithub, FaInstagram, FaTelegram } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:developer@example.com", label: "Email" },
+    { icon: FaGithub, href: "https://github.com", label: "GitHub" },
+    { icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
+    { icon: FaTelegram, href: "https://t.me", label: "Telegram" },
   ];
 
   return (
@@ -18,11 +19,9 @@ const Footer = () => {
           <motion.a
             href="#"
             whileHover={{ scale: 1.05 }}
-            className="font-mono text-lg font-bold"
+            className="text-lg font-bold text-gradient-hero"
           >
-            <span className="text-primary">{"<"}</span>
-            <span className="text-foreground">Dev</span>
-            <span className="text-primary">{"/>"}</span>
+            abdusalimov.com
           </motion.a>
 
           {/* Social Links */}
@@ -31,9 +30,12 @@ const Footer = () => {
               <motion.a
                 key={item.label}
                 href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-2 rounded-lg bg-muted/50 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
+                title={item.label}
               >
                 <item.icon className="w-5 h-5" />
               </motion.a>
@@ -47,10 +49,10 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Decorative code */}
+        {/* Simple footer text */}
         <div className="mt-8 text-center">
-          <span className="font-mono text-xs text-muted-foreground/50">
-            {"/* Built with React, TypeScript & ❤️ */"}
+          <span className="text-xs text-muted-foreground/50">
+            React, TypeScript va ❤️ bilan yaratilgan
           </span>
         </div>
       </div>

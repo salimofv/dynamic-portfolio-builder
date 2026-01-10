@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { FaGithub, FaInstagram, FaTelegram } from "react-icons/fa";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -20,8 +21,14 @@ const Contact = () => {
     { icon: MapPin, label: "Manzil", value: "Toshkent, O'zbekiston" },
   ];
 
+  const socialLinks = [
+    { icon: FaGithub, href: "https://github.com", label: "GitHub", color: "hover:text-white" },
+    { icon: FaInstagram, href: "https://instagram.com", label: "Instagram", color: "hover:text-pink-500" },
+    { icon: FaTelegram, href: "https://t.me", label: "Telegram", color: "hover:text-blue-400" },
+  ];
+
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
+    <section id="contact" className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
@@ -34,14 +41,14 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-primary text-sm mb-4 block">
-            {"// Bog'lanish"}
+          <span className="text-primary text-sm mb-4 block font-medium">
+            Bog'lanish
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Men bilan <span className="text-gradient">Bog'laning</span>
+            Men bilan <span className="text-gradient">bog'laning</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Loyiha haqida gaplashmoqchimisiz? Xabar yuboring!
+            Loyiha haqida gaplashmoqchimisiz yoki savollaringiz bormi? Quyidagi usullar orqali men bilan bog'lanishingiz mumkin!
           </p>
         </motion.div>
 
@@ -75,16 +82,28 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* Decorative code */}
-              <div className="code-block">
-                <pre className="text-xs">
-                  <span className="text-secondary">const</span>{" "}
-                  <span className="text-accent">sendMessage</span> ={" "}
-                  <span className="text-secondary">async</span> () {"=> {"}
-                  {"\n"}  <span className="text-muted-foreground">// Let's create something amazing!</span>
-                  {"\n"}  <span className="text-secondary">await</span> collaborate();
-                  {"\n"}{"}"};
-                </pre>
+              {/* Social Links */}
+              <div className="pt-6 border-t border-border/50">
+                <h4 className="text-lg font-semibold mb-4">Ijtimoiy tarmoqlar</h4>
+                <div className="flex gap-4">
+                  {socialLinks.map((item, index) => (
+                    <motion.a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
+                      whileHover={{ scale: 1.1, y: -3 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`p-3 rounded-xl bg-muted/50 text-muted-foreground ${item.color} transition-all`}
+                      title={item.label}
+                    >
+                      <item.icon className="w-6 h-6" />
+                    </motion.a>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
