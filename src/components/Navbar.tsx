@@ -36,11 +36,9 @@ const Navbar = () => {
         <motion.a
           href="#"
           whileHover={{ scale: 1.05 }}
-          className="font-mono text-xl font-bold"
+          className="text-xl font-bold text-gradient-hero"
         >
-          <span className="text-primary">{"<"}</span>
-          <span className="text-foreground">Dev</span>
-          <span className="text-primary">{"/>"}</span>
+          abdusalimov.com
         </motion.a>
 
         {/* Desktop Navigation */}
