@@ -123,7 +123,7 @@ const Contact = () => {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                     placeholder="Ismingizni kiriting"
                   />
                 </div>
@@ -135,7 +135,7 @@ const Contact = () => {
                   <input
                     type="email"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                     placeholder="email@example.com"
                   />
                 </div>
@@ -147,7 +147,7 @@ const Contact = () => {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                     placeholder="Loyiha mavzusi"
                   />
                 </div>
@@ -159,7 +159,7 @@ const Contact = () => {
                   <textarea
                     required
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none text-foreground placeholder:text-muted-foreground"
                     placeholder="Xabaringizni yozing..."
                   />
                 </div>
