@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { FaGithub, FaInstagram, FaTelegram } from "react-icons/fa";
+import { Code, Palette, Globe, Zap, Database, Smartphone } from "lucide-react";
 
 const roles = [
   "Full Stack Developer",
@@ -9,6 +9,15 @@ const roles = [
   "JavaScript Expert",
   "React Specialist",
   "UI/UX Enthusiast"
+];
+
+const floatingIcons = [
+  { icon: Code, delay: 0, x: -120, y: -80 },
+  { icon: Palette, delay: 0.2, x: 140, y: -60 },
+  { icon: Globe, delay: 0.4, x: -150, y: 80 },
+  { icon: Zap, delay: 0.6, x: 160, y: 100 },
+  { icon: Database, delay: 0.8, x: -100, y: 150 },
+  { icon: Smartphone, delay: 1, x: 120, y: -140 },
 ];
 
 const Hero = () => {
@@ -71,13 +80,52 @@ const Hero = () => {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
+      {/* Floating icons on sides */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {floatingIcons.map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0.3, 0.6, 0.3],
+              scale: 1,
+              y: [0, -15, 0],
+            }}
+            transition={{ 
+              delay: item.delay,
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute hidden md:block"
+            style={{ 
+              left: `calc(50% + ${item.x}px)`,
+              top: `calc(50% + ${item.y}px)`,
+            }}
+          >
+            <div className="p-3 rounded-xl glass neon-border">
+              <item.icon className="w-6 h-6 text-primary/70" />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
       <div className="container relative z-10 px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center"
+          className="text-center max-w-4xl mx-auto"
         >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="inline-block px-4 py-2 rounded-full glass neon-border mb-6"
+          >
+            <span className="text-sm text-muted-foreground">👋 Assalomu alaykum!</span>
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -107,21 +155,54 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed"
+            className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto mb-6 leading-relaxed"
           >
-            Bu yerda men haqimda to'liq ma'lumot topishingiz mumkin. Men zamonaviy va 
-            chiroyli veb-saytlar yarataman. Python, JavaScript, React va boshqa 
-            texnologiyalardan foydalanib, sizning g'oyalaringizni hayotga olib kelaman. 
-            Quyida mening ko'nikmalarim, loyihalarim va tajribam haqida batafsil 
-            tanishishingiz mumkin.
+            Men Abdusalimov - professional dasturchi va veb-dizayner. Bu yerda men haqimda 
+            to'liq ma'lumot topishingiz mumkin. Men zamonaviy va chiroyli veb-saytlar yarataman.
           </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
+          >
+            Python, JavaScript, React, Node.js va boshqa zamonaviy texnologiyalardan foydalanib, 
+            sizning g'oyalaringizni hayotga olib kelaman. 3 yildan ortiq tajriba va 50 dan ortiq 
+            muvaffaqiyatli loyihalar bilan xizmatdaman.
+          </motion.p>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-10"
+          >
+            {[
+              { number: "3+", label: "Yillik tajriba" },
+              { number: "50+", label: "Loyihalar" },
+              { number: "30+", label: "Mijozlar" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.1 + index * 0.1, duration: 0.4 }}
+                className="p-3 rounded-lg glass"
+              >
+                <div className="text-2xl md:text-3xl font-bold text-primary">{stat.number}</div>
+                <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
 
           {/* Social links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="flex items-center justify-center gap-6 mb-12"
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="flex items-center justify-center gap-6"
           >
             {[
               { icon: FaGithub, href: "https://github.com", label: "GitHub" },
@@ -142,49 +223,6 @@ const Hero = () => {
               </motion.a>
             ))}
           </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-gradient-primary text-primary-foreground font-semibold text-lg glow-primary transition-all hover:shadow-lg"
-            >
-              Loyihalarimni ko'ring
-            </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg glass neon-border font-semibold text-lg text-foreground transition-all"
-            >
-              Bog'lanish
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.a
-            href="#about"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <span className="text-sm">Pastga suring</span>
-            <ChevronDown className="w-5 h-5" />
-          </motion.a>
         </motion.div>
       </div>
     </section>
