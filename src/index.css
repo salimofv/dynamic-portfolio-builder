@@ -133,6 +133,7 @@
     mask-composite: exclude;
     opacity: 0.6;
     transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
   .neon-border:hover::before {
