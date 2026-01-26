@@ -16,15 +16,15 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: "developer@example.com" },
-    { icon: Phone, label: "Telefon", value: "+998 90 123 45 67" },
-    { icon: MapPin, label: "Manzil", value: "Toshkent, O'zbekiston" },
+    { icon: Mail, label: "Email", value: "abdusalimovelnur575@gmail.com" },
+    { icon: Phone, label: "Telefon", value: "+998 90 410 91 00" },
+    { icon: MapPin, label: "Manzil", value: "surxondaryo, denov tumani " },
   ];
 
   const socialLinks = [
     { icon: FaGithub, href: "https://github.com", label: "GitHub", color: "hover:text-white" },
     { icon: FaInstagram, href: "https://instagram.com", label: "Instagram", color: "hover:text-pink-500" },
-    { icon: FaTelegram, href: "https://t.me", label: "Telegram", color: "hover:text-blue-400" },
+    { icon: FaTelegram, href: "https://t.me/", label: "Telegram", color: "hover:text-blue-400" },
   ];
 
   return (
