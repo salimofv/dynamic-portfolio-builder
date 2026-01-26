@@ -252,9 +252,9 @@ const Hero = () => {
             className="flex items-center justify-center gap-4"
           >
             {[
-              { icon: FaGithub, href: "https://github.com", label: "GitHub", color: "hover:bg-gray-700" },
-              { icon: FaInstagram, href: "https://instagram.com", label: "Instagram", color: "hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-500" },
-              { icon: FaTelegram, href: "https://t.me", label: "Telegram", color: "hover:bg-blue-500" },
+              { icon: FaGithub, href: "https://github.com/salimofv", label: "GitHub", color: "hover:bg-gray-700" },
+              { icon: FaInstagram, href: "https://instagram.com/maverik1805", label: "Instagram", color: "hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-500" },
+              { icon: FaTelegram, href: "https://t.me/salimofv", label: "Telegram", color: "hover:bg-blue-500" },
             ].map((item) => (
               <motion.a
                 key={item.label}
