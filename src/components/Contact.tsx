@@ -8,11 +8,62 @@ const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [hasError, setHasError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    setHasError(false);
+
+    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN as string | undefined;
+    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID as string | undefined;
+
+    if (!botToken || !chatId) {
+      setHasError(true);
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const text = [
+        "Yangi kontakt xabari:",
+        `Ism: ${formData.name}`,
+        `Email: ${formData.email}`,
+        `Mavzu: ${formData.subject}`,
+        `Xabar: ${formData.message}`,
+      ].join("\n");
+
+      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Telegram request failed");
+      }
+
+      setIsSubmitted(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      setHasError(true);
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  const handleChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   const contactInfo = [
@@ -22,9 +73,9 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: FaGithub, href: "https://github.com", label: "GitHub", color: "hover:text-white" },
-    { icon: FaInstagram, href: "https://instagram.com", label: "Instagram", color: "hover:text-pink-500" },
-    { icon: FaTelegram, href: "https://t.me/", label: "Telegram", color: "hover:text-blue-400" },
+    { icon: FaGithub, href: "https://github.com/salimofv", label: "GitHub", color: "hover:text-white" },
+    { icon: FaInstagram, href: "https://instagram.com/maverik1805", label: "Instagram", color: "hover:text-pink-500" },
+    { icon: FaTelegram, href: "https://t.me/salimofv", label: "Telegram", color: "hover:text-blue-400" },
   ];
 
   return (
@@ -125,6 +176,8 @@ const Contact = () => {
                     required
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                     placeholder="Ismingizni kiriting"
+                    value={formData.name}
+                    onChange={handleChange("name")}
                   />
                 </div>
 
@@ -137,6 +190,8 @@ const Contact = () => {
                     required
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                     placeholder="email@example.com"
+                    value={formData.email}
+                    onChange={handleChange("email")}
                   />
                 </div>
 
@@ -149,6 +204,8 @@ const Contact = () => {
                     required
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                     placeholder="Loyiha mavzusi"
+                    value={formData.subject}
+                    onChange={handleChange("subject")}
                   />
                 </div>
 
@@ -161,20 +218,33 @@ const Contact = () => {
                     rows={4}
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none text-foreground placeholder:text-muted-foreground"
                     placeholder="Xabaringizni yozing..."
+                    value={formData.message}
+                    onChange={handleChange("message")}
                   />
                 </div>
+
+                {hasError && (
+                  <div className="text-sm text-destructive">
+                    Xabar yuborilmadi. Bot token yoki chat ID ni tekshiring.
+                  </div>
+                )}
 
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  disabled={isSubmitted}
+                  disabled={isSubmitted || isSending}
                   className="w-full py-4 rounded-xl bg-gradient-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 glow-primary transition-all disabled:opacity-70"
                 >
                   {isSubmitted ? (
                     <>
                       <CheckCircle className="w-5 h-5" />
                       Yuborildi!
+                    </>
+                  ) : isSending ? (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Yuborilmoqda...
                     </>
                   ) : (
                     <>
