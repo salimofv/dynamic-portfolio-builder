@@ -21,7 +21,7 @@ const Footer = () => {
             whileHover={{ scale: 1.05 }}
             className="text-lg font-bold text-gradient-hero"
           >
-            abdusalimov.com
+            abdusalimov.uz
           </motion.a>
 
           {/* Social Links */}

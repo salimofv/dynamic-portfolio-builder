@@ -38,7 +38,7 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           className="text-xl font-bold text-gradient-hero"
         >
-          abdusalimov.com
+          abdusalimov.uz
         </motion.a>
 
         {/* Desktop Navigation */}

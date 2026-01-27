@@ -33,7 +33,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                abdusalimov.com
+                abdusalimov.uz
               </motion.h1>
             </motion.div>
 
