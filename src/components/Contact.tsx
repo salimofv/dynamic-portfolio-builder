@@ -68,7 +68,7 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: Mail, label: "Email", value: "abdusalimovelnur575@gmail.com" },
-    { icon: Phone, label: "Telefon", value: "+998 90 410 91 00" },
+    { icon: Phone, label: "Telefon", value: "+998 XX XXX XX XX" },
     { icon: MapPin, label: "Manzil", value: "surxondaryo, denov tumani " },
   ];
 
