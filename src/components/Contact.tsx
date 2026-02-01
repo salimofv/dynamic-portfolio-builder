@@ -21,8 +21,8 @@ const Contact = () => {
     e.preventDefault();
     setHasError(false);
 
-    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN as string | undefined;
-    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID as string | undefined;
+    const botToken = (import.meta.env.VITE_TELEGRAM_BOT_TOKEN as string | undefined)?.trim();
+    const chatId = (import.meta.env.VITE_TELEGRAM_CHAT_ID as string | undefined)?.trim();
 
     if (!botToken || !chatId) {
       setHasError(true);
@@ -39,18 +39,14 @@ const Contact = () => {
         `Xabar: ${formData.message}`,
       ].join("\n");
 
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        mode: "no-cors",
+        body: new URLSearchParams({
           chat_id: chatId,
           text,
         }),
       });
-
-      if (!response.ok) {
-        throw new Error("Telegram request failed");
-      }
 
       setIsSubmitted(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
